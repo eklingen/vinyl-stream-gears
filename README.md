@@ -5,7 +5,7 @@ Tiny Vinyl-stream utilities -aka Gulp plugins- for tiny stream operations. No de
 
 > NOTE: No tests have been written yet!
 
-## Installation
+## Installation & usage
 
 `yarn install`. Or `npm install`. Or just copy the files to your own project. You can import only what you need.
 
@@ -22,7 +22,7 @@ const { append } = require('@eklingen/vinyl-stream-gears')
 stream.pipe(append('Merry Christmas'))
 ```
 
-## Apply
+### Apply
 
 Apply a callback function to the file in the stream. Useful for inspecting properties, for example. This is internally also used by the tests. Don't forget to check for `.isBuffer()` or `.contents` etc!
 
