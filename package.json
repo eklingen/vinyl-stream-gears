@@ -2,16 +2,16 @@
   "name": "@eklingen/vinyl-stream-gears",
   "version": "1.0.0",
   "description": "Tiny Vinyl-stream utilities -aka Gulp plugins- for tiny stream operations.",
-  "main": "index.js",
-  "engines": {
-    "node": ">=13.0.1"
-  },
-  "scripts": {
-    "test": "echo 'No tests have been written yet!'"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eklingen/vinyl-stream-gears.git"
+  },
+  "private": false,
+  "author": "Elco Klingen",
+  "license": "MIT",
+  "homepage": "https://github.com/eklingen/vinyl-stream-gears#readme",
+  "bugs": {
+    "url": "https://github.com/eklingen/vinyl-stream-gears/issues"
   },
   "keywords": [
     "vinyl",
@@ -20,12 +20,13 @@
     "utilities",
     "tiny"
   ],
-  "author": "Elco Klingen",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/eklingen/vinyl-stream-gears/issues"
+  "main": "index.js",
+  "engines": {
+    "node": ">=13.0.1"
   },
-  "homepage": "https://github.com/eklingen/vinyl-stream-gears#readme",
+  "scripts": {
+    "test": "echo 'No tests have been written yet!'"
+  },
   "devDependencies": {},
   "dependencies": {},
   "optionalDependencies": {
