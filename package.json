@@ -6,7 +6,6 @@
     "type": "git",
     "url": "git+https://github.com/eklingen/vinyl-stream-gears.git"
   },
-  "private": false,
   "author": "Elco Klingen",
   "license": "MIT",
   "homepage": "https://github.com/eklingen/vinyl-stream-gears#readme",
