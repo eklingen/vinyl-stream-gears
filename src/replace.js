@@ -1,6 +1,5 @@
-// Replace text in files - TODO: ADD SOURCEMAP SUPPORT
+// Replace text in files
 // Use: replace([ { replace: (string or regex), value: (string) }, ... ])
-// Unknown if this messes up sourcemaps
 
 const { Transform } = require('stream')
 

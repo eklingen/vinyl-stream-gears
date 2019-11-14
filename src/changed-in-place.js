@@ -1,11 +1,7 @@
-// Filter unchanged files from the stream by using a cache mechanism with modified file times
+// Filter unchanged files from the stream by using a cache mechanism
 // This is needed for files that are written back to src, to prevent an infinite loop
 // Call changedInPlace.filter(<dest>) to start.
 // Don't forget to call stream.on('finish', changedInPlace.remember(<dest>)) to save the cache.
-
-// TODO:
-// - Instead of explicitly calling remember() near the end of the stream, perhaps it can
-//   automatically attach to the finish event?
 
 const { createHash } = require('crypto')
 const { existsSync, readFileSync, writeFileSync } = require('fs')

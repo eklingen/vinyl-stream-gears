@@ -3,15 +3,19 @@
 
 Tiny Vinyl-stream utilities -aka Gulp plugins- for tiny stream operations. No dependencies, unless explicitly mentioned. These are not full-featured wrappers for other libraries. Most of these functions only work on Vinyl Buffer objects. They have only been tested on Vinyl Buffer objects. Optional argument objects are not sanitized.
 
-> NOTE: No tests have been written yet!
+## Installation
 
-## Installation & usage
+`yarn install`. Or `npm install`. Or just copy the files to your own project.
 
-`yarn install`. Or `npm install`. Or just copy the files to your own project. You can import only what you need.
+## Usage
+
+You can import only what you need.
 
 ```
 const { append, prepend } = require('@eklingen/vinyl-stream-gears')
 ```
+
+---
 
 ### Append
 
@@ -21,6 +25,8 @@ Append text to the end of a file.
 const { append } = require('@eklingen/vinyl-stream-gears')
 stream.pipe(append('Merry Christmas'))
 ```
+
+---
 
 ### Apply
 
@@ -32,6 +38,8 @@ stream.pipe(apply(file => {
   // do something with file
 }))
 ```
+
+---
 
 ### Changed
 
@@ -47,6 +55,8 @@ You can choose between comparing either the file contents (default) via the opti
 ```
 stream.pipe(changed('path/to/destination', { method: 'mtime' })) // Compare via modified timestamp
 ```
+
+---
 
 ### Changed in place
 
@@ -66,6 +76,8 @@ You can choose between comparing either the SHA1 hash of the file contents (defa
 stream.pipe(changedInPlace.filter('path/to/destination', { method: 'mtime' })) // Compare via modified timestamp
 ```
 
+---
+
 ### Filesize
 
 Report the size of the file passing through the stream.
@@ -80,6 +92,8 @@ By default, both the raw and the gzipped size is shown. Disable the latter via t
 ```
 stream.pipe(filesize({ showGzip: false }))
 ```
+
+---
 
 ### Filesize diff
 
@@ -108,6 +122,8 @@ stream.pipe(filesizeDiff.filter({ slack: 100 }))
 stream.pipe(filesizeDiff.report())
 ```
 
+---
+
 ### Filter
 
 Filter files from the stream by property. Useful if you want to remove certain files from the stream.
@@ -116,6 +132,8 @@ Filter files from the stream by property. Useful if you want to remove certain f
 const { filter } = require('@eklingen/vinyl-stream-gears')
 stream.pipe(filter([ file => path.extname(file.relative) === '.map', ... ]))
 ```
+
+---
 
 ### Log
 
@@ -132,6 +150,8 @@ You can use the option `showContents: true` to show the contents. This can be he
 stream.pipe(log({ showContents> true }))
 ```
 
+---
+
 ### Passthrough
 
 Does nothing. Wrapper around `PassThrough`. Can be used for tertiary if else statements within streams.
@@ -140,6 +160,8 @@ Does nothing. Wrapper around `PassThrough`. Can be used for tertiary if else sta
 const { passthrough } = require('@eklingen/vinyl-stream-gears')
 stream.pipe(debug ? doStuff() : passthrough())
 ```
+
+---
 
 ### Prepend
 
@@ -150,6 +172,8 @@ const { prepend } = require('@eklingen/vinyl-stream-gears')
 stream.pipe(prepend('Greetings!'))
 ```
 
+---
+
 ### Rename
 
 Rename files in the stream. Also renames sourcemaps, if the file has a `.sourceMap` property. Possible properties in the mutation object are: `filename`, `extname` and `dirname`.
@@ -158,6 +182,8 @@ Rename files in the stream. Also renames sourcemaps, if the file has a `.sourceM
 const { rename } = require('@eklingen/vinyl-stream-gears')
 stream.pipe(rename(filename => ({ extname: 'css' })))
 ```
+
+---
 
 ### Replace
 
@@ -170,6 +196,8 @@ stream.pipe(replace([
   { replace: /(complicated|regex)/g, value: '' }
 ]))
 ```
+
+---
 
 ### Run
 
@@ -194,6 +222,8 @@ options = {
 ```
 
 Giving a string to `input` should pass that to STDIO. But again, this is relatively untested.
+
+---
 
 ### Sass glob <sup>⚠️ requires package: "glob"</sup>
 

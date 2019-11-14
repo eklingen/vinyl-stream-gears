@@ -1,5 +1,4 @@
 // Append files with text
-// Unknown if this messes up sourcemaps
 
 const { Transform } = require('stream')
 
