@@ -151,7 +151,7 @@ let rules = {
   'prefer-const': ['error', {destructuring: 'all'}],
   'prefer-promise-reject-errors': 'error',
   'quote-props': ['error', 'as-needed'],
-  'quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: false }],
+  'quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
   'rest-spread-spacing': ['error', 'never'],
   'semi': ['error', 'never'],
   'semi-spacing': ['error', { before: false, after: true }],
