@@ -227,7 +227,7 @@ Giving a string to `input` should pass that to STDIO. But again, this is relativ
 
 ## Deprecated
 
-As of v1.0.2, `sassGlob` has been removed, use ["@eklingen/vinyl-stream-unglob"](https://www.npmjs.com/package/vinyl-stream-unglob).
+As of v1.0.2, `sassGlob` has been removed, use ["@eklingen/vinyl-stream-unglob"](https://www.npmjs.com/package/@eklingen/vinyl-stream-unglob).
 
 ---
 
