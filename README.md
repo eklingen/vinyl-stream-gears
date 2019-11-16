@@ -1,7 +1,7 @@
 
 # Vinyl-stream gears
 
-Tiny Vinyl-stream utilities -aka Gulp plugins- for tiny stream operations. No dependencies, unless explicitly mentioned. These are not full-featured wrappers for other libraries. Most of these functions only work on Vinyl Buffer objects. They have only been tested on Vinyl Buffer objects. Optional argument objects are not sanitized.
+Tiny Vinyl-stream utilities -aka Gulp plugins- for tiny stream operations. No dependencies. These are not full-featured wrappers for other libraries. Most of these functions only work on Vinyl Buffer objects. They have only been tested on Vinyl Buffer objects. Optional argument objects are not sanitized.
 
 ## Installation
 
@@ -225,23 +225,9 @@ Giving a string to `input` should pass that to STDIO. But again, this is relativ
 
 ---
 
-### Sass glob <sup>⚠️ requires package: "glob"</sup>
+## Deprecated
 
-Allows the use of globs in Sass files (`@import` and `@use`). For example, something like this:
-
-```
-@import 'components/**/*'
-```
-
-This will expand any file it can find that matches the glob and write it back to the file in the stream. This way, when the file is passed to Sass, it's blissfully unaware any globs have ever been there. This way, you can `@import` or `@use` a complete directory instead of using `_all.scss` files as an index.
-
-```
-const { sassGlob } = require('@eklingen/vinyl-stream-gears')
-.pipe(sassGlob())
-.pipe(sass())
-```
-
-NOTE: The glob is expanded based upon the order the file system gives back. This is not guaranteed to be in alphabetical order!
+As of v1.0.2, `sassGlob` has been removed, use ["@eklingen/vinyl-stream-unglob"](https://www.npmjs.com/package/vinyl-stream-unglob).
 
 ---
 
