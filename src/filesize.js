@@ -4,17 +4,27 @@ const { gzipSync } = require('zlib')
 const { relative } = require('path')
 const { Transform } = require('stream')
 
-function filesize (options = { showGzip: true }) {
+const DEFAULT_OPTIONS = {
+  showRaw: true,
+  showGzip: true
+}
+
+function filesize (options = {}) {
+  options = { ...DEFAULT_OPTIONS, ...options }
+
   function transform (file, encoding, callback) {
     if (!file.isBuffer() || !file.contents || !file.contents.length) {
       return callback(null, file)
     }
 
-    const fileSize = (file.contents.length / 1024).toFixed(2).toString() + ' KB'
-    const gzippedSize = options.showGzip ? (gzipSync(file.contents, { level: 9 }).length / 1024).toFixed(2).toString() + ' KB' : ''
+    const rawSize = options.showRaw ? (file.contents.length / 1024).toFixed(2).toString() + ' KB' : ''
+    const gzipSize = options.showGzip ? (gzipSync(file.contents, { level: 9 }).length / 1024).toFixed(2).toString() + ' KB' : ''
     const color = file.relative.endsWith('map') ? '\x1b[0m' : '\x1b[1m'
 
-    console.log(''.padEnd(4), color, relative(process.cwd(), file.path).padEnd(64), '\x1b[0m', color, fileSize.padStart(12), '\x1b[2m(raw)\x1b[0m', color, gzippedSize.padStart(12), '\x1b[2m(gzip)\x1b[0m')
+    const rawSizeString = options.showRaw ? `\x1b[0m${color}${rawSize.padStart(16)}\x1b[2m (raw)` : ''
+    const gzipSizeString = options.showGzip ? `\x1b[0m${color}${gzipSize.padStart(16)}\x1b[2m (gzip)` : ''
+
+    console.log(''.padEnd(4), color, relative(process.cwd(), file.path).padEnd(64), rawSizeString, gzipSizeString, '\x1b[0m')
 
     return callback(null, file)
   }
