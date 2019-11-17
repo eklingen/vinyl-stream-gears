@@ -56,6 +56,12 @@ You can choose between comparing either the file contents (default) via the opti
 stream.pipe(changed('path/to/destination', { method: 'mtime' })) // Compare via modified timestamp
 ```
 
+If you don't care about the file contents, just that it is physically present, you could set the option `method: 'exists'`.
+
+```
+stream.pipe(changed('path/to/destination', { method: 'exists '})) // Skips if a file with the same name already exists
+```
+
 ---
 
 ### Changed in place
