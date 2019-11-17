@@ -18,7 +18,7 @@ function filesize (options = {}) {
     }
 
     const rawSize = options.showRaw ? (file.contents.length / 1024).toFixed(2).toString() + ' KB' : ''
-    const gzipSize = options.showGzip ? (gzipSync(file.contents, { level: 9 }).length / 1024).toFixed(2).toString() + ' KB' : ''
+    const gzipSize = options.showGzip ? (gzipSync(file.contents, { level: 6 }).length / 1024).toFixed(2).toString() + ' KB' : ''
     const color = file.relative.endsWith('map') ? '\x1b[0m' : '\x1b[1m'
 
     const rawSizeString = options.showRaw ? `\x1b[0m${color}${rawSize.padStart(16)}\x1b[2m (raw)` : ''
