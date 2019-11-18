@@ -3,6 +3,9 @@
 const { Transform } = require('stream')
 const { relative } = require('path')
 
+const COLUMNS = Math.min(process.stdout.columns || 80, 120)
+const truncateDots = (text = '', max = 50) => (text.length > max) ? `${text.substring(0, ((max / 2) - 1))}...${text.substring(text.length - ((max / 2) - 2), text.length)}` : text
+
 // Starts tracking filesize
 function start () {
   function transform (file, encoding, callback) {
@@ -44,11 +47,16 @@ function report (options = { reportOnlyChanged: true }) {
     }
 
     if (!options.reportOnlyChanged || file.contents.length !== file.originalSize) {
-      const filesizeString = `${(file.contents.length / 1024).toFixed(2)} KB`
-      const difference = ((file.contents.length - file.originalSize) / 1024).toFixed(2)
-      const differenceString = `${difference > 0 ? '+' : '-'}${difference} KB`
+      const color = file.relative.endsWith('map') ? '\x1b[0m' : '\x1b[1m'
+      const filesize = `${(file.contents.length / 1024).toFixed(2)} KB`
+      const filesizeString = `\x1b[0m${color}${filesize.padStart(15)}\x1b[2m (size)`
+      const diff = ((file.contents.length - file.originalSize) / 1024).toFixed(2)
+      const diffsize = `${diff > 0 ? '+' : '-'}${diff} KB`
+      const diffsizeString = `\x1b[0m${color}${diffsize.padStart(15)}\x1b[2m (diff)`
+      const filenameLength = COLUMNS - 60
+      const filenameString = truncateDots(relative(process.cwd(), file.path).padEnd(filenameLength), filenameLength)
 
-      console.log(''.padEnd(4), '\x1b[1m', relative(process.cwd(), file.path).padEnd(64), '\x1b[0m', filesizeString.padStart(12), '\x1b[2m(raw)\x1b[0m', differenceString.padStart(12), '\x1b[2m(difference)\x1b[0m')
+      console.log(''.padEnd(4), color, filenameString, filesizeString, diffsizeString, '\x1b[0m')
     }
 
     return callback(null, file)

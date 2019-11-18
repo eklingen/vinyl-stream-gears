@@ -9,6 +9,9 @@ const DEFAULT_OPTIONS = {
   showGzip: true
 }
 
+const COLUMNS = Math.min(process.stdout.columns || 80, 120)
+const truncateDots = (text = '', max = 50) => (text.length > max) ? `${text.substring(0, ((max / 2) - 1))}...${text.substring(text.length - ((max / 2) - 2), text.length)}` : text
+
 function filesize (options = {}) {
   options = { ...DEFAULT_OPTIONS, ...options }
 
@@ -20,11 +23,12 @@ function filesize (options = {}) {
     const rawSize = options.showRaw ? (file.contents.length / 1024).toFixed(2).toString() + ' KB' : ''
     const gzipSize = options.showGzip ? (gzipSync(file.contents, { level: 6 }).length / 1024).toFixed(2).toString() + ' KB' : ''
     const color = file.relative.endsWith('map') ? '\x1b[0m' : '\x1b[1m'
+    const rawSizeString = options.showRaw ? `\x1b[0m${color}${rawSize.padStart(15)}\x1b[2m (raw) ` : ''
+    const gzipSizeString = options.showGzip ? `\x1b[0m${color}${gzipSize.padStart(15)}\x1b[2m (gzip)` : ''
+    const filenameLength = COLUMNS - 60
+    const filenameString = truncateDots(relative(process.cwd(), file.path).padEnd(filenameLength), filenameLength)
 
-    const rawSizeString = options.showRaw ? `\x1b[0m${color}${rawSize.padStart(16)}\x1b[2m (raw)` : ''
-    const gzipSizeString = options.showGzip ? `\x1b[0m${color}${gzipSize.padStart(16)}\x1b[2m (gzip)` : ''
-
-    console.log(''.padEnd(4), color, relative(process.cwd(), file.path).padEnd(64), rawSizeString, gzipSizeString, '\x1b[0m')
+    console.log(''.padEnd(4), color, filenameString, rawSizeString, gzipSizeString, '\x1b[0m')
 
     return callback(null, file)
   }

@@ -5,7 +5,7 @@ const { resolve } = require('path')
 const { Transform } = require('stream')
 
 const DEFAULT_OPTIONS = {
-  method: 'contents' // can also be 'mtime'
+  method: 'contents' // can also be 'mtime' or 'exists'
 }
 
 function changed (destination = '', options = {}) {
@@ -22,6 +22,8 @@ function changed (destination = '', options = {}) {
       if (options.method === 'contents' && readFileSync(targetPath, { encoding: 'utf8' }) === file.contents.toString('utf8')) {
         return callback()
       } else if (options.method === 'mtime' && (!file.stat || file.stat.mtimeMs <= statSync(targetPath).mtimeMs)) {
+        return callback()
+      } else if (options.method === 'exists') {
         return callback()
       }
     }
