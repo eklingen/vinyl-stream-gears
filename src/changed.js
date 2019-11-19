@@ -5,7 +5,8 @@ const { resolve } = require('path')
 const { Transform } = require('stream')
 
 const DEFAULT_OPTIONS = {
-  method: 'contents' // can also be 'mtime' or 'exists'
+  method: 'contents', // can also be 'mtime' or 'exists'
+  injectSourceMapComment: false
 }
 
 function changed (destination = '', options = {}) {
@@ -18,12 +19,23 @@ function changed (destination = '', options = {}) {
 
     const targetPath = resolve(process.cwd(), destination, file.relative)
 
-    if (existsSync(targetPath)) {
-      if (options.method === 'contents' && readFileSync(targetPath, { encoding: 'utf8' }) === file.contents.toString('utf8')) {
-        return callback()
-      } else if (options.method === 'mtime' && (!file.stat || file.stat.mtimeMs <= statSync(targetPath).mtimeMs)) {
-        return callback()
-      } else if (options.method === 'exists') {
+    if (!existsSync(targetPath)) {
+      return callback(null, file)
+    }
+
+    if (options.method === 'mtime' && (!file.stat || file.stat.mtimeMs <= statSync(targetPath).mtimeMs)) {
+      return callback()
+    }
+
+    if (options.method === 'contents') {
+      let contents = file.contents.toString('utf8')
+
+      if (options.injectSourceMapComment) {
+        const sourceMapComment = `\n/*# sourceMappingURL=${file.basename}.map */`
+        contents = (contents.indexOf(sourceMapComment) === -1) ? contents + sourceMapComment : contents
+      }
+
+      if (readFileSync(targetPath, { encoding: 'utf8' }) === contents) {
         return callback()
       }
     }

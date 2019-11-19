@@ -62,6 +62,11 @@ If you don't care about the file contents, just that it is physically present, y
 stream.pipe(changed('path/to/destination', { method: 'exists '})) // Skips if a file with the same name already exists
 ```
 
+When comparing file contents, keep in mind that anything that is added later in the stream will show up as a difference. If a sourcemap comment is added later in the stream, this shows up as a difference. Use the option `injectSourceMapComment: true` to append a sourcemap comment to the file contents when comparing. Appending it to a the file itself could cause some tools to output it twice.
+
+```
+stream.pipe(chanted())
+
 ---
 
 ### Changed in place
