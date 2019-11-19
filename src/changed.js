@@ -19,8 +19,12 @@ function changed (destination = '', options = {}) {
 
     const targetPath = resolve(process.cwd(), destination, file.relative)
 
-    if (!existsSync(targetPath) || options.method === 'exists') {
+    if (!existsSync(targetPath)) {
       return callback(null, file)
+    }
+
+    if (options.method === 'exists') {
+      return callback()
     }
 
     if (options.method === 'mtime' && (!file.stat || file.stat.mtimeMs <= statSync(targetPath).mtimeMs)) {
