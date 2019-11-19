@@ -19,7 +19,7 @@ function changed (destination = '', options = {}) {
 
     const targetPath = resolve(process.cwd(), destination, file.relative)
 
-    if (!existsSync(targetPath)) {
+    if (!existsSync(targetPath) || options.method === 'exists') {
       return callback(null, file)
     }
 
