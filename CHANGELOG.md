@@ -1,6 +1,7 @@
 
 # Changelog
 
+v1.1.0 - Refactored internals, added a few tests
 v1.0.9 - Bugfix
 v1.0.8 - Fixed bug in `changed` with `exist` option
 v1.0.7 - Added `injectSourceMapComment` options to `changed`

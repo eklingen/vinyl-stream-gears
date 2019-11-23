@@ -3,15 +3,13 @@
 
 const { Transform } = require('stream')
 
-function prepend (value) {
-  value = value.toString()
-
+function prepend (value = '') {
   function transform (file, encoding, callback) {
     if (!file.isBuffer() || !value.length) {
       return callback(null, file)
     }
 
-    file.contents = Buffer.concat([Buffer.from(value), file.contents || ''])
+    file.contents = Buffer.concat([Buffer.from(value.toString()), file.contents])
 
     return callback(null, file)
   }

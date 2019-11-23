@@ -1,6 +1,6 @@
 {
   "name": "@eklingen/vinyl-stream-gears",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Tiny Vinyl-stream utilities -aka Gulp plugins- for tiny stream operations.",
   "repository": {
     "type": "git",
@@ -24,18 +24,16 @@
     "node": ">=12.13.0"
   },
   "scripts": {
-    "test": "echo 'No tests have been written yet!'"
+    "test": "echo 'Testing...'; ava; echo 'Linting...'; eslint index.js --fix; eslint modules/ --fix;"
   },
+  "dependencies": {},
   "devDependencies": {
     "ava": "^2.4.0",
     "eslint": "^6.7.0",
-    "eslint-config-standard": "^14.1.0",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prefer-object-spread": "^1.2.1",
     "eslint-plugin-simple-import-sort": "^5.0.0",
     "eslint-plugin-smells": "^1.0.1",
     "vinyl-fs": "^3.0.3"
-  },
-  "dependencies": {},
-  "optionalDependencies": {}
+  }
 }
