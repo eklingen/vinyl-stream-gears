@@ -1,7 +1,7 @@
 
 # Changelog
 
-v1.2.0 - Added flush callback option to `apply`
+v1.2.0 - Added flush callback option to `apply` (also: first release with a tag)
 v1.1.0 - Refactored internals, added a few tests
 v1.0.9 - Bugfix
 v1.0.8 - Fixed bug in `changed` with `exist` option
