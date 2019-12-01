@@ -2,10 +2,10 @@
 
 const { Transform } = require('stream')
 
-function apply (cb = () => {}) {
+function apply (transformCallback = () => {}, flushCallback = () => {}) {
   function transform (file, encoding, callback) {
     try {
-      cb(file)
+      transformCallback(file)
     } catch (e) {
       //
     }
@@ -13,7 +13,15 @@ function apply (cb = () => {}) {
     return callback(null, file)
   }
 
-  return new Transform({ transform, readableObjectMode: true, writableObjectMode: true })
+  function flush (callback) {
+    try {
+      flushCallback()
+    } catch (e) {
+      //
+    }
+  }
+
+  return new Transform({ transform, flush, readableObjectMode: true, writableObjectMode: true })
 }
 
 module.exports = apply
