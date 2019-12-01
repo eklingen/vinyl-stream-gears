@@ -4,7 +4,7 @@
 const { PassThrough } = require('stream')
 
 function passthrough () {
-  return new PassThrough()
+  return new PassThrough({ objectMode: true })
 }
 
 module.exports = passthrough
