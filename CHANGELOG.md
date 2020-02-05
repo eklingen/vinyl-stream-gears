@@ -1,6 +1,7 @@
 
 # Changelog
 
+v1.2.3 - Upgrade dependencies
 v1.2.2 - Upgrade dependencies
 v1.2.1 - Missing `objectMode: true` on `passthrough` was added
 v1.2.0 - Added flush callback option to `apply` (also: first release with a tag)
