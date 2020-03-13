@@ -6,8 +6,8 @@ function apply (transformCallback = () => {}, flushCallback = () => {}) {
   function transform (file, encoding, callback) {
     try {
       transformCallback(file)
-    } catch (e) {
-      //
+    } catch (error) {
+      console.warn(error)
     }
 
     return callback(null, file)
@@ -16,8 +16,8 @@ function apply (transformCallback = () => {}, flushCallback = () => {}) {
   function flush (callback) {
     try {
       flushCallback()
-    } catch (e) {
-      //
+    } catch (error) {
+      console.warn(error)
     }
   }
 
