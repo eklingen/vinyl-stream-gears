@@ -1,6 +1,7 @@
 
 # Changelog
 
+v1.2.5 - Updated development node version to 12.16.0
 v1.2.4 - Fix `apply` swallowing errors
 v1.2.3 - Upgrade dependencies
 v1.2.2 - Upgrade dependencies
