@@ -1,6 +1,7 @@
 
 # Changelog
 
+v1.2.7 - Removed `apply` try/catch
 v1.2.6 - Upgrade dependencies
 v1.2.5 - Updated development node version to 12.16.0
 v1.2.4 - Fix `apply` swallowing errors

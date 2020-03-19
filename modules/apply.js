@@ -4,21 +4,13 @@ const { Transform } = require('stream')
 
 function apply (transformCallback = () => {}, flushCallback = () => {}) {
   function transform (file, encoding, callback) {
-    try {
-      transformCallback(file)
-    } catch (error) {
-      console.warn(error)
-    }
+    transformCallback(file)
 
     return callback(null, file)
   }
 
   function flush (callback) {
-    try {
-      flushCallback()
-    } catch (error) {
-      console.warn(error)
-    }
+    flushCallback()
   }
 
   return new Transform({ transform, flush, readableObjectMode: true, writableObjectMode: true })
