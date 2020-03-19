@@ -39,13 +39,8 @@ stream.pipe(apply(file => {
 }))
 ```
 
-You can also apply a flush callback. Useful for displaying totals, for example.
-
-```javascript
-let count = 0
-const { apply } = require('@eklingen/vinyl-stream-gears')
-stream.pipe(apply(file => count++, () => console.log(`${count} files.`)))
-```
+(since v2.0.0) This used to have a flush callback as well, but as it turns out, the flush event is inconsistently handled in Node.
+It's best to use stream.Finished or an end handler.
 
 ---
 

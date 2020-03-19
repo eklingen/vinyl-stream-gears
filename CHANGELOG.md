@@ -1,6 +1,7 @@
 
 # Changelog
 
+v2.0.0 - Removed `apply` flush callback
 v1.2.7 - Removed `apply` try/catch
 v1.2.6 - Upgrade dependencies
 v1.2.5 - Updated development node version to 12.16.0
