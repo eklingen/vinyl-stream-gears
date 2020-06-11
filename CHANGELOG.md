@@ -1,6 +1,7 @@
 
 # Changelog
 
+v2.0.2 - Upgrade dev dependencies
 v2.0.1 - Upgrade dependencies
 v2.0.0 - Removed `apply` flush callback
 v1.2.7 - Removed `apply` try/catch
