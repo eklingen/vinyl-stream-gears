@@ -1,6 +1,6 @@
 {
   "name": "@eklingen/vinyl-stream-gears",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "Tiny Vinyl-stream utilities -aka Gulp plugins- for tiny stream operations.",
   "repository": {
     "type": "git",
