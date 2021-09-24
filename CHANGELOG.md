@@ -1,6 +1,7 @@
 
 # Changelog
 
+v3.0.0 - Upgrade node to v14 LTS
 v2.0.3 - Upgrade dependencies
 v2.0.2 - Upgrade dev dependencies
 v2.0.1 - Upgrade dependencies
