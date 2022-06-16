@@ -1,6 +1,7 @@
 
 # Changelog
 
+v4.0.1 - Fix partial commit
 v4.0.0 - ChangedInPlace now saves hashes as Base64 instead of UTF-8
 v3.0.2 - Upgrade dependencies
 v3.0.1 - Upgrade dependencies
