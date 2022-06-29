@@ -41,9 +41,15 @@ function saveCacheToDisk (destination = '') {
     }
   }
 
+  // Sort CACHE[destination] alphabetically before saving, saved on merge conflicts
+  const orderedCache = Object.keys(CACHE[destination]).sort().reduce((obj, key) => {
+    obj[key] = CACHE[destination][key]
+    return obj
+  }, {})
+
   const cachePath = getCachePath(destination)
 
-  writeFileSync(cachePath, JSON.stringify(CACHE[destination], null, 2), 'utf8')
+  writeFileSync(cachePath, JSON.stringify(orderedCache, null, 2), 'utf8')
 }
 
 function filter (destination = '', options = {}) {
