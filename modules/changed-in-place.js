@@ -8,8 +8,6 @@ const { existsSync, readFileSync, writeFileSync } = require('fs')
 const { resolve } = require('path')
 const { Transform } = require('stream')
 
-let HASH
-
 const CACHE = {}
 const DEFAULT_OPTIONS = {
   method: 'hash' // can also be 'mtime'
@@ -64,9 +62,7 @@ function filter (destination = '', options = {}) {
       return callback(null, file)
     }
 
-    HASH = HASH || createHash('sha1')
-
-    const value = (options.method === 'hash') ? HASH.update(file.contents.toString('utf8')).copy().digest('base64') : file.stat.mtimeMs
+    const value = (options.method === 'hash') ? createHash('sha1', 'cache').update(file.contents.toString('utf8')).digest('base64') : file.stat.mtimeMs
 
     if (CACHE[destination][file.relative] && CACHE[destination][file.relative] === value) {
       return callback()
