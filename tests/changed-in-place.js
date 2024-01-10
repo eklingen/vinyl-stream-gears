@@ -1,6 +1,4 @@
-
 import test from 'ava'
-import { src } from 'vinyl-fs'
 
 const changedInPlace = require('../modules/changed-in-place')
 const apply = require('../modules/apply')

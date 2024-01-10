@@ -6,16 +6,16 @@ const { Transform } = require('stream')
 
 const DEFAULT_OPTIONS = {
   showRaw: true,
-  showGzip: true
+  showGzip: true,
 }
 
 const COLUMNS = Math.min(process.stdout.columns || 80, 120)
-const truncateDots = (text = '', max = 50) => (text.length > max) ? `${text.substring(0, ((max / 2) - 1))}...${text.substring(text.length - ((max / 2) - 2), text.length)}` : text
+const truncateDots = (text = '', max = 50) => (text.length > max ? `${text.substring(0, max / 2 - 1)}...${text.substring(text.length - (max / 2 - 2), text.length)}` : text)
 
-function filesize (options = {}) {
+function filesize(options = {}) {
   options = { ...DEFAULT_OPTIONS, ...options }
 
-  function transform (file, encoding, callback) {
+  function transform(file, encoding, callback) {
     if (!file.isBuffer() || !file.contents || !file.contents.length) {
       return callback(null, file)
     }

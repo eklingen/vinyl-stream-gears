@@ -3,8 +3,8 @@
 
 const { Transform } = require('stream')
 
-function prepend (value = '') {
-  function transform (file, encoding, callback) {
+function prepend(value = '') {
+  function transform(file, encoding, callback) {
     if (!file.isBuffer() || !value.length) {
       return callback(null, file)
     }

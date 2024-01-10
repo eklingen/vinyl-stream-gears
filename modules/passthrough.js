@@ -3,7 +3,7 @@
 
 const { PassThrough } = require('stream')
 
-function passthrough () {
+function passthrough() {
   return new PassThrough({ objectMode: true })
 }
 

@@ -1,6 +1,4 @@
-
 import test from 'ava'
-import { src } from 'vinyl-fs'
 
 const filter = require('../modules/filter')
 const apply = require('../modules/apply')

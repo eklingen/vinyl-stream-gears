@@ -10,14 +10,14 @@ const { Transform } = require('stream')
 
 const CACHE = {}
 const DEFAULT_OPTIONS = {
-  method: 'hash' // can also be 'mtime'
+  method: 'hash', // can also be 'mtime'
 }
 
-function getCachePath (destination = '') {
+function getCachePath(destination = '') {
   return resolve(process.cwd(), destination, '.file-cache')
 }
 
-function loadCacheFromDisk (destination = '') {
+function loadCacheFromDisk(destination = '') {
   const cachePath = getCachePath(destination)
 
   if (existsSync(cachePath)) {
@@ -27,7 +27,7 @@ function loadCacheFromDisk (destination = '') {
   return {}
 }
 
-function saveCacheToDisk (destination = '') {
+function saveCacheToDisk(destination = '') {
   if (!CACHE[destination]) {
     return
   }
@@ -40,29 +40,31 @@ function saveCacheToDisk (destination = '') {
   }
 
   // Sort CACHE[destination] alphabetically before saving, saved on merge conflicts
-  const orderedCache = Object.keys(CACHE[destination]).sort().reduce((obj, key) => {
-    obj[key] = CACHE[destination][key]
-    return obj
-  }, {})
+  const orderedCache = Object.keys(CACHE[destination])
+    .sort()
+    .reduce((obj, key) => {
+      obj[key] = CACHE[destination][key]
+      return obj
+    }, {})
 
   const cachePath = getCachePath(destination)
 
   writeFileSync(cachePath, JSON.stringify(orderedCache, null, 2), 'utf8')
 }
 
-function filter (destination = '', options = {}) {
+function filter(destination = '', options = {}) {
   options = { ...DEFAULT_OPTIONS, ...options }
 
   if (!CACHE[destination]) {
     CACHE[destination] = loadCacheFromDisk(destination)
   }
 
-  function transform (file, encoding, callback) {
+  function transform(file, encoding, callback) {
     if (!file.isBuffer() || !file.contents || !file.contents.length) {
       return callback(null, file)
     }
 
-    const value = (options.method === 'hash') ? createHash('sha1', 'cache').update(file.contents.toString('utf8')).digest('base64') : file.stat.mtimeMs
+    const value = options.method === 'hash' ? createHash('sha1', 'cache').update(file.contents.toString('utf8')).digest('base64') : file.stat.mtimeMs
 
     if (CACHE[destination][file.relative] && CACHE[destination][file.relative] === value) {
       return callback()
@@ -76,12 +78,12 @@ function filter (destination = '', options = {}) {
   return new Transform({ transform, readableObjectMode: true, writableObjectMode: true })
 }
 
-function remember (destination = '') {
+function remember(destination = '') {
   if (CACHE[destination]) {
     saveCacheToDisk(destination)
   }
 
-  function transform (file, encoding, callback) {
+  function transform(file, encoding, callback) {
     return callback(null, file)
   }
 

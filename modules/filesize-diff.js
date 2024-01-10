@@ -4,11 +4,11 @@ const { Transform } = require('stream')
 const { relative } = require('path')
 
 const COLUMNS = Math.min(process.stdout.columns || 80, 120)
-const truncateDots = (text = '', max = 50) => (text.length > max) ? `${text.substring(0, ((max / 2) - 1))}...${text.substring(text.length - ((max / 2) - 2), text.length)}` : text
+const truncateDots = (text = '', max = 50) => (text.length > max ? `${text.substring(0, max / 2 - 1)}...${text.substring(text.length - (max / 2 - 2), text.length)}` : text)
 
 // Starts tracking filesize
-function start () {
-  function transform (file, encoding, callback) {
+function start() {
+  function transform(file, encoding, callback) {
     if (!file.isBuffer() || !file.contents || !file.contents.length) {
       return callback(null, file)
     }
@@ -23,13 +23,13 @@ function start () {
 
 // Filter out files that haven't shrinked in size
 // Slack is the amount of bytes it must have shrunk to count, so there's no fudging in the margins
-function filter (options = { slack: 100 }) {
-  function transform (file, encoding, callback) {
+function filter(options = { slack: 100 }) {
+  function transform(file, encoding, callback) {
     if (!file.isBuffer() || !file.contents || !file.contents.length || file.originalSize === undefined) {
       return callback(null, file)
     }
 
-    if ((file.contents.length + options.slack) >= file.originalSize) {
+    if (file.contents.length + options.slack >= file.originalSize) {
       return callback()
     }
 
@@ -40,8 +40,8 @@ function filter (options = { slack: 100 }) {
 }
 
 // Reports savings to console
-function report (options = { reportOnlyChanged: true }) {
-  function transform (file, encoding, callback) {
+function report(options = { reportOnlyChanged: true }) {
+  function transform(file, encoding, callback) {
     if (!file.isBuffer() || file.originalSize === undefined) {
       return callback(null, file)
     }

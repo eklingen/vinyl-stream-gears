@@ -3,8 +3,8 @@
 
 const { Transform } = require('stream')
 
-function filter (filters = []) {
-  function transform (file, encoding, callback) {
+function filter(filters = []) {
+  function transform(file, encoding, callback) {
     if (!file.isBuffer() || !filters.length) {
       return callback(null, file)
     }

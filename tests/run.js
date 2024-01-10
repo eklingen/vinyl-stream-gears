@@ -1,6 +1,4 @@
-
 import test from 'ava'
-import { src } from 'vinyl-fs'
 
 const run = require('../modules/run')
 const apply = require('../modules/apply')

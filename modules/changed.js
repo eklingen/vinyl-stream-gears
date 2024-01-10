@@ -6,13 +6,13 @@ const { Transform } = require('stream')
 
 const DEFAULT_OPTIONS = {
   method: 'contents', // can also be 'mtime' or 'exists'
-  injectSourceMapComment: false
+  injectSourceMapComment: false,
 }
 
-function changed (destination = '', options = {}) {
+function changed(destination = '', options = {}) {
   options = { ...DEFAULT_OPTIONS, ...options }
 
-  function transform (file, encoding, callback) {
+  function transform(file, encoding, callback) {
     if (!file.isBuffer() || !file.contents || !file.contents.length || !destination) {
       return callback(null, file)
     }
@@ -36,7 +36,7 @@ function changed (destination = '', options = {}) {
 
       if (options.injectSourceMapComment) {
         const sourceMapComment = `\n/*# sourceMappingURL=${file.basename}.map */`
-        contents = (contents.indexOf(sourceMapComment) === -1) ? contents + sourceMapComment : contents
+        contents = contents.indexOf(sourceMapComment) === -1 ? contents + sourceMapComment : contents
       }
 
       if (readFileSync(targetPath, { encoding: 'utf8' }) === contents) {

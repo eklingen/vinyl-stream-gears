@@ -2,8 +2,8 @@
 
 const { Transform } = require('stream')
 
-function apply (transformCallback = () => {}) {
-  function transform (file, encoding, callback) {
+function apply(transformCallback = () => {}) {
+  function transform(file, encoding, callback) {
     transformCallback(file)
 
     return callback(null, file)

@@ -3,8 +3,8 @@
 
 const { Transform } = require('stream')
 
-function replace (replacements = []) {
-  function transform (file, encoding, callback) {
+function replace(replacements = []) {
+  function transform(file, encoding, callback) {
     if (!file.isBuffer() || !replacements.length) {
       return callback(null, file)
     }

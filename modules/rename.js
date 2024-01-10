@@ -5,10 +5,10 @@
 const { Transform } = require('stream')
 const { dirname, basename, extname, join } = require('path')
 
-const DEFAULT_RENAME_FUNCTION = (filename) => {}
+const DEFAULT_RENAME_FUNCTION = filename => {}
 
-function rename (cb = DEFAULT_RENAME_FUNCTION) {
-  function transform (file, encoding, callback) {
+function rename(cb = DEFAULT_RENAME_FUNCTION) {
+  function transform(file, encoding, callback) {
     if (!file.isBuffer() || cb === DEFAULT_RENAME_FUNCTION) {
       return callback(null, file)
     }
@@ -16,10 +16,10 @@ function rename (cb = DEFAULT_RENAME_FUNCTION) {
     let filename = {
       dirname: dirname(file.relative),
       basename: basename(file.relative, extname(file.relative)),
-      extname: extname(file.relative)
+      extname: extname(file.relative),
     }
 
-    filename = { ...filename, ...(cb.call(this, filename)) }
+    filename = { ...filename, ...cb.call(this, filename) }
     file.path = join(file.base, filename.dirname, `${filename.basename}.${filename.extname}`)
 
     if (file.sourceMap) {

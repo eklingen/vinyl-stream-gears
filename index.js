@@ -19,5 +19,5 @@ module.exports = {
   prepend: require('./modules/prepend'),
   rename: require('./modules/rename'),
   replace: require('./modules/replace'),
-  run: require('./modules/run')
+  run: require('./modules/run'),
 }

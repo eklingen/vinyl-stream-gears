@@ -1,6 +1,4 @@
-
 import test from 'ava'
-import { src } from 'vinyl-fs'
 
 const filesizeDiff = require('../modules/filesize-diff')
 const apply = require('../modules/apply')

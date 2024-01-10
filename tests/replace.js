@@ -1,6 +1,4 @@
-
 import test from 'ava'
-import { src } from 'vinyl-fs'
 
 const replace = require('../modules/replace')
 const apply = require('../modules/apply')

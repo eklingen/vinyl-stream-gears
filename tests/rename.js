@@ -1,6 +1,4 @@
-
 import test from 'ava'
-import { src } from 'vinyl-fs'
 
 const rename = require('../modules/rename')
 const apply = require('../modules/apply')

@@ -2,8 +2,8 @@
 
 const { Transform } = require('stream')
 
-function append (value = '') {
-  function transform (file, encoding, callback) {
+function append(value = '') {
+  function transform(file, encoding, callback) {
     if (!file.isBuffer() || !value.length) {
       return callback(null, file)
     }

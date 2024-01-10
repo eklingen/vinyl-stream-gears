@@ -10,13 +10,13 @@ const DEFAULT_OPTIONS = {
   input: false,
   quiet: false,
   stdio: ['pipe', 'pipe', 'pipe'],
-  windowsHide: true
+  windowsHide: true,
 }
 
-function run (command, options = {}) {
+function run(command, options = {}) {
   options = { ...DEFAULT_OPTIONS, ...options }
 
-  function transform (file, encoding, callback) {
+  function transform(file, encoding, callback) {
     const data = execSync(command, options).toString()
 
     if (options.input && file.isBuffer() && file.contents && file.contents.length) {

@@ -1,4 +1,3 @@
-
 import test from 'ava'
 import { src } from 'vinyl-fs'
 
@@ -32,9 +31,9 @@ test('should not fail if file contents is empty', async t => {
   const result = new Promise((resolve, reject) => {
     const stream = src('./tests/assets/empty-file', { read: false })
 
-    stream.pipe(apply(file => file.contents = Buffer.from(source)))
+    stream.pipe(apply(file => (file.contents = Buffer.from(source))))
     stream.pipe(append(value))
-    stream.on('data', file => contents = file.contents.toString('utf8'))
+    stream.on('data', file => (contents = file.contents.toString('utf8')))
     stream.on('end', file => resolve(contents))
     stream.destroy()
   })
@@ -52,9 +51,9 @@ test('should append `value` to the file contents, when it is a string', async t 
   const result = new Promise((resolve, reject) => {
     const stream = src('./tests/assets/empty-file', { read: false })
 
-    stream.pipe(apply(file => file.contents = Buffer.from(source)))
+    stream.pipe(apply(file => (file.contents = Buffer.from(source))))
     stream.pipe(append(value))
-    stream.on('data', file => contents = file.contents.toString('utf8'))
+    stream.on('data', file => (contents = file.contents.toString('utf8')))
     stream.on('end', file => resolve(contents))
     stream.destroy()
   })
@@ -72,9 +71,9 @@ test('should append the string representation of `value` to the file contents, w
   const result = new Promise((resolve, reject) => {
     const stream = src('./tests/assets/empty-file', { read: false })
 
-    stream.pipe(apply(file => file.contents = Buffer.from(source)))
+    stream.pipe(apply(file => (file.contents = Buffer.from(source))))
     stream.pipe(append(value))
-    stream.on('data', file => contents = file.contents.toString('utf8'))
+    stream.on('data', file => (contents = file.contents.toString('utf8')))
     stream.on('end', file => resolve(contents))
     stream.destroy()
   })
