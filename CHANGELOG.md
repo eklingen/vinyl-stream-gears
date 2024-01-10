@@ -1,6 +1,7 @@
 
 # Changelog
 
+v4.0.5 - (chore) vinyl fs dep bump
 v4.0.4 - DevEnv changes
 v4.0.3 - No longer reuse hash object in an attempt to fix ever changing hashes
 v4.0.2 - Cache keys are now ordered alphabetically to reduce merge conflicts in usage
