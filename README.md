@@ -1,6 +1,10 @@
 
 # Vinyl-stream gears
 
+> This project was originally developed independently and has been used in projects at [Fabrique](https//www.fabrique.nl) and [Q42](https://www.q42.nl).
+> It remains publicly available and can be forked or maintained independently if needed.
+> No guarantees are provided for long-term maintenance.
+
 Tiny Vinyl-stream utilities -aka Gulp plugins- for tiny stream operations. No dependencies. These are not full-featured wrappers for other libraries. Most of these functions only work on Vinyl Buffer objects. They have only been tested on Vinyl Buffer objects. Optional argument objects are not sanitized.
 
 ## Installation
